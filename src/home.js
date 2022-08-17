@@ -18,6 +18,9 @@ export default function Home() {
         <Link to="/creativeImageGallery">
           <h3>creativeImageGallery</h3>
         </Link>
+        <Link to="/MobileAnimatedNavigationBar">
+          <h3>MobileAnimatedNavigationBar</h3>
+        </Link>
       </div>
     </div>
   );

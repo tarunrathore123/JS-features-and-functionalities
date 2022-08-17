@@ -3,6 +3,7 @@ import "./App.css";
 import TestimonialSlider from "./features/slider/testimonialslider/TestimonialSlider";
 import CreativeImageGallery from "./functionalities/CreativeImageGallery";
 import SongWithSoundWave from "./functionalities/SongWithSoundWave/SongWithSoundWave";
+import MobileAnimatedNavigationBar from "./features/navigationbar/MobileAnimatedNavigationBar";
 import Home from "./home";
 
 function App() {
@@ -23,6 +24,11 @@ function App() {
         <Route
           path="/creativeImageGallery"
           element={<CreativeImageGallery />}
+          exact
+        ></Route>
+        <Route
+          path="/MobileAnimatedNavigationBar"
+          element={<MobileAnimatedNavigationBar />}
           exact
         ></Route>
       </Routes>

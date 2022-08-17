@@ -1,0 +1,49 @@
+.mobilenavigationbar {
+    background-color: blue;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .overlay {
+        display: flex;
+        align-items: center;
+        background-color: white;
+        padding: 20px 30px;
+        justify-content: space-evenly;
+
+
+        max-width: 500px;
+        width: 100%;
+
+        .iconwithname {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 10px 20px;
+
+
+            img {
+                width: 25px;
+                margin-right: 10px;
+            }
+
+            p {
+                display: none;
+            }
+
+            transition: all .5s;
+
+        }
+
+        .active {
+            p {
+                display: block;
+            }
+
+            background-color:aqua;
+            border-radius: 10px;
+        }
+    }
+}
