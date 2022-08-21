@@ -5,12 +5,18 @@ import CreativeImageGallery from "./functionalities/CreativeImageGallery";
 import SongWithSoundWave from "./functionalities/SongWithSoundWave/SongWithSoundWave";
 import MobileAnimatedNavigationBar from "./features/navigationbar/MobileAnimatedNavigationBar";
 import Home from "./home";
+import PhotographyPortfolio from "./websites/PhotographyPortfolio";
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Home />} exact></Route>
+        <Route
+          path="/websites/photographyportfolio"
+          element={<PhotographyPortfolio />}
+          exact
+        ></Route>
         <Route
           path="/features/slider/testimonialslider"
           element={<TestimonialSlider />}
