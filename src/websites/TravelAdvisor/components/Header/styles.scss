@@ -1,0 +1,38 @@
+.appbar {
+
+    .toolbar {
+        .title {
+            @media (max-width:500px) {
+                display: none;
+            }
+        }
+
+        display: flex;
+        justify-content: space-between;
+
+        .right {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .searchoverlay {
+                display: flex;
+                align-items: center;
+
+                .searchicon {
+                    display: flex;
+                    align-items: center;
+                    transform: translateX(30px);
+                }
+
+                .searchinput {
+                    // width: 60px;
+                    color: #fff;
+                    padding: 5px 5px 5px 35px;
+                    background: rgba($color: #fff, $alpha: .15);
+                    border-radius: 10px;
+                }
+            }
+        }
+    }
+}

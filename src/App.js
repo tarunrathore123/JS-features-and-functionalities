@@ -6,6 +6,7 @@ import SongWithSoundWave from "./functionalities/SongWithSoundWave/SongWithSound
 import MobileAnimatedNavigationBar from "./features/navigationbar/MobileAnimatedNavigationBar";
 import Home from "./home";
 import PhotographyPortfolio from "./websites/PhotographyPortfolio";
+import TravelAdvisor from "./websites/TravelAdvisor";
 
 function App() {
   return (
@@ -15,6 +16,11 @@ function App() {
         <Route
           path="/websites/photographyportfolio"
           element={<PhotographyPortfolio />}
+          exact
+        ></Route>
+        <Route
+          path="/websites/traveladvisor"
+          element={<TravelAdvisor />}
           exact
         ></Route>
         <Route
