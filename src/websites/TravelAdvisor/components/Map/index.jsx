@@ -26,7 +26,7 @@ export default function Index({
   return (
     <div className="mapcontainer">
       <GoogleMapReact
-        bootstrapURLKeys={{ key: "AIzaSyBGaRSFuP-idTc312G2lELDBMRYo_jvqh4" }}
+        bootstrapURLKeys={{ key: process.env.TRAVELADVISORGOOGLEMAPKEY }}
         defaultCenter={defaultCoordinates}
         center={coordinates}
         defaultZoom={14}

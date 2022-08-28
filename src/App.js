@@ -7,27 +7,35 @@ import MobileAnimatedNavigationBar from "./features/navigationbar/MobileAnimated
 import Home from "./home";
 import PhotographyPortfolio from "./websites/PhotographyPortfolio";
 import TravelAdvisor from "./websites/TravelAdvisor";
+import AdminDashboard from "./websites/AdminDashboard";
+import { Ecommerce } from "./websites/AdminDashboard/pages";
+import Dashboard from "./websites/Dashboard";
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Home />} exact></Route>
-        <Route
+        {/* <Route
           path="/websites/photographyportfolio"
           element={<PhotographyPortfolio />}
           exact
-        ></Route>
+        ></Route> */}
         <Route
           path="/websites/traveladvisor"
           element={<TravelAdvisor />}
           exact
         ></Route>
-        <Route
+        <Route path="websites/AdminDashboard" element={<AdminDashboard />}>
+          <Route path="" element={<Ecommerce />} />
+          <Route path="ecommerce" element={<Ecommerce />} />
+        </Route>
+        {/* <Route
           path="/features/slider/testimonialslider"
           element={<TestimonialSlider />}
           exact
         ></Route>
+        <Route path="/websites/dashboard" element={<Dashboard />} exact></Route>
         <Route
           path="/SongWithSoundWave"
           element={<SongWithSoundWave />}
@@ -42,7 +50,7 @@ function App() {
           path="/MobileAnimatedNavigationBar"
           element={<MobileAnimatedNavigationBar />}
           exact
-        ></Route>
+        ></Route> */}
       </Routes>
     </div>
   );

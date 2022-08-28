@@ -35,6 +35,9 @@ export default function Home() {
         <Link to="/websites/TravelAdvisor">
           <h3>TravelAdvisor</h3>
         </Link>
+        <Link to="/websites/AdminDashboard">
+          <h3>AdminDashboard</h3>
+        </Link>
       </div>
     </div>
   );
