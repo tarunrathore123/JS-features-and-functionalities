@@ -6,38 +6,51 @@ import { AiOutlineSetting } from "react-icons/ai";
 import { MdKeyboardArrowUp } from "react-icons/md";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { updateActiveUser } from "./action";
+import { updateActiveUser, updateChats, updateCurrentUser } from "./action";
 
 export default function Index() {
   const dispatch = useDispatch();
 
-  const [inputMessage, setInputMessage] = useState("");
-
-  const users = useSelector((state) => state.users);
-  const { activeUser, currentUser } = useSelector((state) => state);
+  const [profilePopup, setProfilePopup] = useState(false);
 
   const [toggleActiveConversations, setToggleActiveConversations] =
     useState(true);
 
-  const [currentChatId, setCurrentChatId] = useState(
-    currentUser.chatId + "-" + activeUser.chatId + "-" + currentUser.chatId
+  const [inputMessage, setInputMessage] = useState("");
+
+  const { users, activeUser, currentUser, chats } = useSelector(
+    (state) => state
   );
 
-  const [chats, setChats] = useState(
-    useSelector((state) => state.chats[currentChatId.slice(0, 5)])
-  );
+  const changeActiveUser = (index) => {
+    dispatch(updateActiveUser(index));
+  };
+
+  const changeCurrentUser = (index) => {
+    dispatch(updateCurrentUser(index));
+  };
+
+  const [currentChat, setCurrentChat] = useState([]);
+
+  const [currentChatId, setCurrentChatId] = useState("");
 
   const submitHandler = (e) => {
     e.preventDefault();
-    setChats((chats) => [...chats, currentUser.chatId + inputMessage]);
     setInputMessage("");
+    dispatch(updateChats(currentUser.chatId + inputMessage));
   };
 
   useEffect(() => {
     setCurrentChatId(
       currentUser.chatId + "-" + activeUser.chatId + "-" + currentUser.chatId
     );
-  }, [activeUser.name, currentUser.name]);
+    console.log(chats[currentChatId.slice(0, 5)]);
+    if (chats[currentChatId.slice(0, 5)]) {
+      setCurrentChat(chats[currentChatId.slice(0, 5)]);
+    } else {
+      setCurrentChat(chats[currentChatId.slice(3)]);
+    }
+  }, [currentUser.chatId, activeUser.chatId, currentChatId]);
 
   return (
     <div className="chat-assignment">
@@ -52,10 +65,32 @@ export default function Index() {
             </h2>
             <div className="profile-section">
               <img src={avatar} alt="" />
-              <div className="name">
+              <div className="name" onClick={() => setProfilePopup(true)}>
                 {currentUser.name}
                 <AiOutlineSetting />
               </div>
+              {profilePopup && (
+                <div className="profile-popup">
+                  <div className="popup">
+                    <p className="close" onClick={() => setProfilePopup(false)}>
+                      close
+                    </p>
+                    <p>Current User: {currentUser.name}</p>
+                    <p>Change Current User: </p>
+                    {users.map((user, index) => {
+                      return (
+                        <p
+                          key={index}
+                          className="user"
+                          onClick={() => changeCurrentUser(index)}
+                        >
+                          {user.name}
+                        </p>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
               <div className="designation">Lead UI/UX designer</div>
               <div className="active-button">
                 {/* <input type="button" /> */}
@@ -83,10 +118,10 @@ export default function Index() {
                         <li
                           key={index}
                           className={`user ${
-                            activeUser === index ? "active" : ""
+                            activeUser.name === user.name ? "active" : ""
                           }`}
                           onClick={() => {
-                            dispatch(updateActiveUser(index));
+                            changeActiveUser(index);
                           }}
                         >
                           <img src={avatar} alt="" />
@@ -106,7 +141,7 @@ export default function Index() {
         </div>
         <div className="middle">
           <div className="chat-section">
-            {chats?.map((chat, index) => {
+            {currentChat?.map((chat, index) => {
               return (
                 <li key={index}>
                   <div
@@ -133,7 +168,7 @@ export default function Index() {
             </form>
           </div>
         </div>
-        <div className="right">right</div>
+        <div className="right"></div>
       </div>
     </div>
   );

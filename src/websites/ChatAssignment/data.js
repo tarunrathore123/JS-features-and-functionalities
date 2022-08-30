@@ -10,4 +10,5 @@ export const usersData = [
 
 export const chats = {
   "ab-bc": ["abhi how are you", "abwhat are you doing", "bcnothing"],
+  "ab-cd": ["abhi"],
 };
