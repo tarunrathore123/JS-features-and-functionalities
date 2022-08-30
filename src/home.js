@@ -8,14 +8,14 @@ export default function Home() {
       <div className="features">
         <h2>Features</h2>
         <div className="slider">
-          <Link to="/features/slider/testimonialslider">
+          {/* <Link to="/features/slider/testimonialslider">
             <h3>Testimonial Slider</h3>
-          </Link>
+          </Link> */}
         </div>
       </div>
       <div className="functionalities">
         <h2>Functionalities</h2>
-
+        {/* 
         <Link to="/SongWithSoundWave">
           <h3>SongWithSoundWave</h3>
         </Link>
@@ -24,12 +24,12 @@ export default function Home() {
         </Link>
         <Link to="/MobileAnimatedNavigationBar">
           <h3>MobileAnimatedNavigationBar</h3>
-        </Link>
+        </Link> */}
       </div>
       <div className="functionalities">
         <h2>Websites</h2>
 
-        <Link to="/websites/PhotographyPortfolio">
+        {/* <Link to="/websites/PhotographyPortfolio">
           <h3>PhotographyPortfolio</h3>
         </Link>
         <Link to="/websites/TravelAdvisor">
@@ -37,6 +37,9 @@ export default function Home() {
         </Link>
         <Link to="/websites/AdminDashboard">
           <h3>AdminDashboard</h3>
+        </Link> */}
+        <Link to="/websites/ChatAssignment">
+          <h3>ChatAssignment</h3>
         </Link>
       </div>
     </div>

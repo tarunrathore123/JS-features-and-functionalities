@@ -10,6 +10,7 @@ import TravelAdvisor from "./websites/TravelAdvisor";
 import AdminDashboard from "./websites/AdminDashboard";
 import { Ecommerce } from "./websites/AdminDashboard/pages";
 import Dashboard from "./websites/Dashboard";
+import ChatAssignment from "./websites/ChatAssignment";
 
 function App() {
   return (
@@ -30,6 +31,12 @@ function App() {
           <Route path="" element={<Ecommerce />} />
           <Route path="ecommerce" element={<Ecommerce />} />
         </Route>
+        <Route
+          path="/websites/ChatAssignment"
+          element={<ChatAssignment />}
+          exact
+        ></Route>
+
         {/* <Route
           path="/features/slider/testimonialslider"
           element={<TestimonialSlider />}
