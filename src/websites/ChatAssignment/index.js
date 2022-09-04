@@ -1,17 +1,27 @@
 import React, { useState, useEffect } from "react";
 import "./style.scss";
-import { avatar } from "./images";
 import { BsLightningChargeFill } from "react-icons/bs";
 import { AiOutlineSetting } from "react-icons/ai";
+import { IoSend } from "react-icons/io5";
 import { MdKeyboardArrowUp } from "react-icons/md";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { updateActiveUser, updateChats, updateCurrentUser } from "./action";
+import {
+  updateActiveUser,
+  updateChats,
+  updateCurrentUser,
+  updateFirstTimeChat,
+} from "./action";
 
 export default function Index() {
   const dispatch = useDispatch();
 
-  const [profilePopup, setProfilePopup] = useState(false);
+  const [isActive, setActive] = useState(false);
+
+  const myFunction = () => {
+    if (!isActive) setActive(true);
+    else setActive(false);
+  };
 
   const [toggleActiveConversations, setToggleActiveConversations] =
     useState(true);
@@ -41,14 +51,18 @@ export default function Index() {
   };
 
   useEffect(() => {
+    setActive(false);
+
     setCurrentChatId(
       currentUser.chatId + "-" + activeUser.chatId + "-" + currentUser.chatId
     );
-    console.log(chats[currentChatId.slice(0, 5)]);
-    if (chats[currentChatId.slice(0, 5)]) {
+    if (chats[currentChatId.slice(0, 5)]?.length) {
       setCurrentChat(chats[currentChatId.slice(0, 5)]);
-    } else {
+    } else if (chats[currentChatId.slice(3)]) {
       setCurrentChat(chats[currentChatId.slice(3)]);
+    } else {
+      dispatch(updateFirstTimeChat(currentChatId.slice(0, 5)));
+      setCurrentChat(chats[currentChatId.slice(0, 5)]);
     }
   }, [currentUser.chatId, activeUser.chatId, currentChatId]);
 
@@ -61,22 +75,24 @@ export default function Index() {
               <div className="icon">
                 <BsLightningChargeFill color="blue" />
               </div>
-              <p>Quick Chat</p>
+              <p>QuickChat</p>
             </h2>
             <div className="profile-section">
-              <img src={avatar} alt="" />
-              <div className="name" onClick={() => setProfilePopup(true)}>
-                {currentUser.name}
-                <AiOutlineSetting />
-              </div>
-              {profilePopup && (
-                <div className="profile-popup">
-                  <div className="popup">
-                    <p className="close" onClick={() => setProfilePopup(false)}>
-                      close
+              <img src={currentUser.avatar} alt="" />
+              <div className="name">
+                {currentUser.name}&nbsp;
+                <div className="dropdown">
+                  <AiOutlineSetting
+                    className="option-icon"
+                    onClick={myFunction}
+                  />
+                  <div className={`dropdown-content ${isActive ? "show" : ""}`}>
+                    <p style={{ fontSize: "14px", textAlign: "center" }}>
+                      {currentUser.name}
                     </p>
-                    <p>Current User: {currentUser.name}</p>
-                    <p>Change Current User: </p>
+                    <p style={{ fontSize: "12px", paddingTop: "10px" }}>
+                      Change current user:
+                    </p>
                     {users.map((user, index) => {
                       return (
                         <p
@@ -90,11 +106,10 @@ export default function Index() {
                     })}
                   </div>
                 </div>
-              )}
-              <div className="designation">Lead UI/UX designer</div>
-              <div className="active-button">
-                {/* <input type="button" /> */}
               </div>
+
+              <div className="designation">Lead UI/UX designer</div>
+              <div className="active-button">Active</div>
             </div>
             <div className="active-conservation">
               <div
@@ -103,7 +118,7 @@ export default function Index() {
                   setToggleActiveConversations(!toggleActiveConversations);
                 }}
               >
-                <h4>Active Conversations</h4>
+                <h5>Active Conversations</h5>
                 {toggleActiveConversations ? (
                   <MdKeyboardArrowUp />
                 ) : (
@@ -124,7 +139,7 @@ export default function Index() {
                             changeActiveUser(index);
                           }}
                         >
-                          <img src={avatar} alt="" />
+                          <img src={user.avatar} alt="" />
                           <p>{user.name}</p>
                         </li>
                       )
@@ -134,7 +149,10 @@ export default function Index() {
             </div>
             <div className="archived-conservation">
               <div className="heading">
-                <h4>Archived Conversations</h4>
+                <h5>
+                  Archived Conversations{" "}
+                  <MdKeyboardArrowDown style={{ float: "right" }} />
+                </h5>
               </div>
             </div>
           </div>
@@ -151,7 +169,16 @@ export default function Index() {
                         : "message-left"
                     }`}
                   >
-                    <span className="message">{chat.slice(2)}</span>
+                    <img
+                      src={`${
+                        currentUser.chatId === chat.slice(0, 2)
+                          ? currentUser.avatar
+                          : activeUser.avatar
+                      }`}
+                      alt=""
+                    />
+                    &nbsp;&nbsp;
+                    <span className="message"> {chat.slice(2)}</span>
                   </div>
                 </li>
               );
@@ -161,10 +188,16 @@ export default function Index() {
             <form onSubmit={submitHandler}>
               <input
                 type="text"
+                placeholder="Enter your message here"
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
               />
-              <button type="submit">Send</button>
+              <button type="submit">
+                Send&nbsp;&nbsp;
+                <span>
+                  <IoSend />
+                </span>
+              </button>
             </form>
           </div>
         </div>
