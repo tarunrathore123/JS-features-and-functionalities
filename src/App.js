@@ -11,18 +11,20 @@ import AdminDashboard from "./websites/AdminDashboard";
 import { Ecommerce } from "./websites/AdminDashboard/pages";
 import Dashboard from "./websites/Dashboard";
 import ChatAssignment from "./websites/ChatAssignment";
+import Hundreddayscss from "./Hundreddayscss";
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Home />} exact></Route>
+        <Route path="/100dayscss" element={<Hundreddayscss />} exact></Route>
         {/* <Route
           path="/websites/photographyportfolio"
           element={<PhotographyPortfolio />}
           exact
         ></Route> */}
-        <Route
+        {/* <Route
           path="/websites/traveladvisor"
           element={<TravelAdvisor />}
           exact
@@ -35,7 +37,7 @@ function App() {
           path="/websites/ChatAssignment"
           element={<ChatAssignment />}
           exact
-        ></Route>
+        ></Route> */}
 
         {/* <Route
           path="/features/slider/testimonialslider"
